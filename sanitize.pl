@@ -38,6 +38,7 @@ sub init
  $tsdX="";
  $loc="JW";
  $leftsect=0;
+ system("rm -f /tmp/sanchk*");
  $samplefile="/tmp/sanchk.tmp"; # Location of sample to scan
  $logfile="/usr/local/bin/DeviceWipeVerify.log";
  $TotSampleAmt=0.1;             # % of disk to be sampled (10%)
@@ -233,11 +234,13 @@ sub verify
  $readtime=time-$readtime;
  $readtime=($readtime*$NumOfSamples*$sections)/60;
  printf(" Disk size: %.1fgb, Verification size: %.1fgb, Estimated runtime: %.2f min\n",$drvsize, $smpsize, $readtime);
+# printf(" obs: %s, osect: %s, offset: %s\n",$obs, $osect, $offset);
  $verstart=strftime("%Y-%m-%d %H:%M:%S",localtime(time));
  $bogus=localtime();
  print(" Verification started @ $bogus\n\n");
  for($i=0;$i<$sections;++$i)
  {
+#  $samplefile="/tmp/sanchk-$i.tmp"; # Location of sample to scan
   if($i==0) #(READ MBR)
   {
    $skip=0; # Used to move to each section for sampling
@@ -246,7 +249,7 @@ sub verify
    chksmpl();
    $readloc=int(rand($rndrange));
    $readloc=$skip+$readloc;
-   $readloc=($readloc>$totsect-$bufcnt)?($totsect-$bufcnt):$readloc;
+   $readloc=($readloc>$osect-1)?($osect-1):$readloc;
    system("dd if=/dev/$sdX of=$samplefile skip=$readloc count=1 bs=$obs 1>/dev/null 2>&1");
    chksmpl();
   }
@@ -262,7 +265,7 @@ sub verify
    }
   }
   $skip=$skip+$offset;
-  if(!($i%10)){$bogus=$i/10;print("\rDisk verified: $bogus%")};
+  printf("\rDisk verified: %.0f%%",($i/$sections)*100);
   if($vfyfail){last;}
  }
  if($vfyfail){wipe();}

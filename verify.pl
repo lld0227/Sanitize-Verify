@@ -38,6 +38,7 @@ sub init
  }
  $loc="JW";
  $logfile="/usr/local/bin/DeviceWipeVerify.log";
+ system("rm -f /tmp/sanchk*");
  $samplefile="/tmp/sanchk.tmp"; # Location of sample to scan
  $TotSampleAmt=0.1;             # % of disk to be sampled (10%)
  $sections=1024;                # disk divided in sections for even random sampling
@@ -71,6 +72,7 @@ sub wdrv # Which device to check
  $readtime=time-$readtime;
  $readtime=($readtime*$NumOfSamples*$sections)/60;
  printf("Disk size: %.1fgb, Verification size: %.1fgb, Estimated runtime: %.2f min\n",$drvsize, $smpsize, $readtime);
+# printf("obs: %s, offset: %s, range: %s\n",$obs, $offset, $rndrange);
 }
 
 sub chkdrv # Start checking the device - copy the sample ($samplefile) to the tmp dir and scan
