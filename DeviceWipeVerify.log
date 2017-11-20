@@ -1,0 +1,4 @@
+Location|Product|Vendor|SerialNum|SanType|SanMethod|StartWipe|EndWipe|TotDrvSize|TotSampleSize|NumofSamples|StartVerf|EndVerf
+JW|Card  Reader|SD/MMC||Purge|3pass|2017-11-01 12:12:58|2017-11-01 12:26:47|0.9gb|0.1gb|2000|2017-11-01 12:26:47|2017-11-01 12:28:34
+JW|WDC WD1600BEKT-0|Western Digital|WD-WXP1A71U9283|Purge|SecErase|2017-11-01 14:44:12|2017-11-01 15:15:11|149.1gb|14.9gb|2000|2017-11-01 15:15:11|2017-11-01 15:21:18
+JW|HGST HTS725050A7||TF655AY914UG3J|Unknown|Unknown|||298.1gb|29.8gb|2048|2017-11-17 16:28:38|2017-11-17 16:28:59
