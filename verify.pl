@@ -71,7 +71,6 @@ sub wdrv # Which device to check
  $readtime=time-$readtime;
  $readtime=($readtime*$NumOfSamples*$sections)/60;
  printf("Disk size: %.1fgb, Verification size: %.1fgb, Estimated runtime: %.2f min\n",$drvsize, $smpsize, $readtime);
- printf("obs: %s, offset: %s, range: %s\n",$obs, $offset, $rndrange);
 }
 
 sub chkdrv # Start checking the device - copy the sample ($samplefile) to the tmp dir and scan
